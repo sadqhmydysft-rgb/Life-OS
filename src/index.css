@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", "Vazirmatn", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-accent-50: #eef2ff;
+  --color-accent-100: #e0e7ff;
+  --color-accent-200: #c7d2fe;
+  --color-accent-300: #a5b4fc;
+  --color-accent-400: #818cf8;
+  --color-accent-500: #6366f1;
+  --color-accent-600: #5457e8;
+  --color-accent-700: #4649d1;
+
+  --shadow-soft: 0 1px 2px 0 rgb(9 9 11 / 0.04), 0 10px 30px -14px rgb(9 9 11 / 0.14);
+  --shadow-lift: 0 2px 6px -2px rgb(9 9 11 / 0.08), 0 24px 56px -16px rgb(9 9 11 / 0.25);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    @apply bg-[#f6f7f9] text-zinc-900 dark:bg-[#0a0a0c] dark:text-zinc-100;
+  }
+
+  html[lang="fa"] body {
+    font-family: "Vazirmatn", "Inter", ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: 0 !important;
+  }
+
+  ::selection {
+    background: rgb(99 102 241 / 0.22);
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    @apply cursor-pointer opacity-60 dark:invert;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-zinc-200/80 bg-white/75 shadow-soft backdrop-blur-xl dark:border-white/[0.08] dark:bg-zinc-900/55;
+  }
+
+  .glass-strong {
+    @apply border border-zinc-200/90 bg-white/90 backdrop-blur-2xl dark:border-white/10 dark:bg-zinc-900/90;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-zinc-200 bg-white/80 px-3.5 py-2.5 text-sm text-zinc-900 outline-none transition-all duration-200 placeholder:text-zinc-400 focus:border-accent-400 focus:ring-4 focus:ring-accent-500/10 dark:border-white/10 dark:bg-white/[0.04] dark:text-zinc-100 dark:placeholder:text-zinc-500;
+  }
+
+  .chip {
+    @apply inline-flex shrink-0 items-center gap-1.5 rounded-full border border-zinc-200/90 bg-white/70 px-3 py-1.5 text-xs font-medium text-zinc-600 transition-all duration-200 hover:border-zinc-300 hover:text-zinc-900 dark:border-white/10 dark:bg-white/[0.04] dark:text-zinc-400 dark:hover:border-white/20 dark:hover:text-zinc-100;
+  }
+
+  .kbd {
+    @apply inline-flex items-center gap-0.5 rounded-md border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 font-sans text-[10px] font-medium text-zinc-500 dark:border-white/10 dark:bg-white/5 dark:text-zinc-400;
+  }
+}
+
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(161 161 170 / 0.35) transparent;
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgb(161 161 170 / 0.35);
+    border-radius: 999px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@utility scroll-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes typing-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
