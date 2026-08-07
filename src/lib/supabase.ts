@@ -199,7 +199,7 @@ export const supa = {
   signInWithGoogle(redirectTo: string): void {
     const c = creds();
     if (!c) return;
-    const url = `${c.url}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(redirectTo)}`;
+    const url = `${c.url}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(redirectTo)}&apikey=${c.anon}`;
     window.location.assign(url);
   },
 
