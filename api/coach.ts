@@ -13,7 +13,7 @@ interface CoachBody {
   messages?: ChatMessage[];
 }
 
-const MODEL = "gemini-2.5-flash";
+const MODEL = "gemini-3.1-flash-lite";
 
 export default async function handler(req: any, res: any) {
   res.setHeader("Access-Control-Allow-Origin", "*");
