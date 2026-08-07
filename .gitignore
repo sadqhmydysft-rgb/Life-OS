@@ -25,3 +25,7 @@ dist-ssr
 .vite-source-tags.js
 .vercel
 -e e2e/*.png
+node_modules_broken/
+node_modules_stale/
+.vercel_old/
+agon-agent_1-5c0411df (1).zip
