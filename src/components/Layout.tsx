@@ -231,6 +231,16 @@ export function AppLayout() {
         <Logo />
         <div className="flex items-center gap-2">
           <ThemeLangControls compact />
+          <IconButton
+            label={t("nav.logout")}
+            onClick={() => {
+              logout();
+              navigate("/auth");
+            }}
+            className="h-8 w-8 text-zinc-400 hover:text-rose-500"
+          >
+            <LogOut size={15} />
+          </IconButton>
         </div>
       </header>
 
