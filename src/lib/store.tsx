@@ -80,6 +80,7 @@ function userFromSupa(session: SupaSession): User {
     provider: session.user.app_metadata?.provider === "google" ? "google" : "email",
     createdAt: todayISO(),
     is_admin: session.user.app_metadata?.is_admin === true,
+    is_premium: session.user.app_metadata?.is_premium === true,
     lastLoginAt: session.user.last_sign_in_at,
   };
 }

@@ -23,6 +23,8 @@ export interface User {
   createdAt: string;
   /** site-owner flag; only editable server-side (Supabase app_metadata) or via local-mode gate */
   is_admin?: boolean;
+  /** paid subscriber flag; only editable server-side (Supabase app_metadata) or via local-mode gate */
+  is_premium?: boolean;
   lastLoginAt?: string; // ISO datetime
 }
 
