@@ -10,6 +10,8 @@ import { TasksPage } from "./pages/Tasks";
 import { HabitsPage } from "./pages/Habits";
 import { CalendarPage } from "./pages/CalendarPage";
 import { AdminPage } from "./pages/Admin";
+import { ReviewPage } from "./pages/Review";
+import UpdateToast from "./components/UpdateToast";
 
 export default function App() {
   return (
@@ -25,11 +27,13 @@ export default function App() {
                 <Route path="tasks" element={<TasksPage />} />
                 <Route path="habits" element={<HabitsPage />} />
                 <Route path="calendar" element={<CalendarPage />} />
+                <Route path="review" element={<ReviewPage />} />
                 <Route path="admin" element={<AdminPage />} />
               </Route>
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </BrowserRouter>
+          <UpdateToast />
         </AppProvider>
       </ThemeProvider>
     </LanguageProvider>

@@ -146,6 +146,11 @@ export function AppLayout() {
     labelText: t(n.label),
   }));
   if (user.is_admin) items.push({ to: "/admin", icon: ShieldCheck, labelText: t("admin.nav") });
+  items.splice(items.length - (user.is_admin ? 1 : 0), 0, {
+    to: "/review",
+    icon: Sparkles,
+    labelText: t("nav.review"),
+  });
 
   return (
     <div className="min-h-dvh">

@@ -78,12 +78,22 @@ export interface ChatMessage {
   source?: "server" | "byok" | "local";
 }
 
+export interface Reflection {
+  id: string;
+  weekStart: string; // ISO date of the Saturday/Monday this reflection covers
+  wins: string;
+  challenges: string;
+  changeNext: string;
+  createdAt: string;
+}
+
 export interface UserData {
   goals: Goal[];
   tasks: Task[];
   habits: Habit[];
   logs: HabitLogs;
   chat: ChatMessage[];
+  reflections: Reflection[];
 }
 
 export const GOAL_CATEGORIES: GoalCategory[] = [

@@ -13,6 +13,7 @@ import type {
   Habit,
   HabitLogs,
   Lang,
+  Reflection,
   Task,
   User,
   UserData,
@@ -58,7 +59,7 @@ function saveLocalData(userId: string, data: UserData) {
 }
 
 function emptyData(): UserData {
-  return { goals: [], tasks: [], habits: [], logs: {}, chat: [] };
+  return { goals: [], tasks: [], habits: [], logs: {}, chat: [], reflections: [] };
 }
 
 async function hashPassword(pw: string): Promise<string> {
@@ -118,7 +119,9 @@ interface AppCtx {
   habits: Habit[];
   logs: HabitLogs;
   chat: ChatMessage[];
+  reflections: Reflection[];
 
+  addReflection: (r: Omit<Reflection, "id" | "createdAt">) => Reflection;
   addGoal: (g: Omit<Goal, "id" | "createdAt">) => Goal;
   updateGoal: (id: string, patch: Partial<Goal>) => void;
   deleteGoal: (id: string) => void;
@@ -151,6 +154,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [logs, setLogs] = useState<HabitLogs>({});
   const [chat, setChat] = useState<ChatMessage[]>([]);
+  const [reflections, setReflections] = useState<Reflection[]>([]);
   const [coachOpen, setCoachOpen] = useState(false);
   const loadedFor = useRef<string | null>(null);
   const remoteTimer = useRef<number | null>(null);
@@ -225,7 +229,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   /* ------------------------------ persistence ------------------------------ */
   useEffect(() => {
     if (!user || loadedFor.current !== user.id) return;
-    const data = { goals, tasks, habits, logs, chat };
+    const data = { goals, tasks, habits, logs, chat, reflections };
     saveLocalData(user.id, data); // warm offline cache
     if (backendMode === "supabase") {
       if (remoteTimer.current) window.clearTimeout(remoteTimer.current);
@@ -240,7 +244,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         }
       }, 900);
     }
-  }, [user, backendMode, goals, tasks, habits, logs, chat]);
+  }, [user, backendMode, goals, tasks, habits, logs, chat, reflections]);
 
   const adoptInternal = useCallback((u: User, data: UserData, remember: boolean) => {
     setErrorUser({ id: u.id, email: u.email });
@@ -251,6 +255,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setHabits(data.habits);
     setLogs(data.logs);
     setChat(data.chat);
+    setReflections(data.reflections ?? []);
     saveLocalData(u.id, data);
     if (remember) localStorage.setItem(LS_SESSION, JSON.stringify({ userId: u.id }));
   }, []);
@@ -414,10 +419,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setHabits([]);
     setLogs({});
     setChat([]);
+    setReflections([]);
     setCoachOpen(false);
   }, [backendMode]);
 
   /* ------------------------------ data actions ------------------------------ */
+
+  const addReflection = useCallback(
+    (r: Omit<Reflection, "id" | "createdAt">): Reflection => {
+      const reflection: Reflection = { ...r, id: uid(), createdAt: todayISO() };
+      setReflections((prev) => [reflection, ...prev]);
+      return reflection;
+    },
+    [],
+  );
 
   const addGoal = useCallback((g: Omit<Goal, "id" | "createdAt">): Goal => {
     const goal: Goal = { ...g, id: uid(), createdAt: todayISO() };
@@ -517,6 +532,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     habits,
     logs,
     chat,
+    reflections,
+    addReflection,
     addGoal,
     updateGoal,
     deleteGoal,
