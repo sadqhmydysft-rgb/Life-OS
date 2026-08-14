@@ -30,7 +30,7 @@ export interface SupaSession {
     id: string;
     email: string;
     user_metadata?: Record<string, unknown>;
-    app_metadata?: { provider?: string; is_admin?: boolean };
+    app_metadata?: { provider?: string; is_admin?: boolean; is_premium?: boolean };
     last_sign_in_at?: string;
   };
 }
