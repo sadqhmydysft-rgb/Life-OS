@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Check,
   KanbanSquare,
@@ -243,6 +243,12 @@ export function TasksPage() {
   };
 
   const openCounts = tasks.filter((x) => x.status !== "done").length;
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("new") === "1") {
+      setEditing(null);
+      setModal(true);
+    }
+  }, []);
 
   return (
     <div className="space-y-5">
