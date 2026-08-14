@@ -80,6 +80,11 @@ export function Dashboard() {
     progress: goalProgress(g, tasks.filter((x) => x.goalId === g.id)),
     openLinked: tasks.filter((x) => x.goalId === g.id && x.status !== "done").length,
   }));
+  /* gamification (premium): simple XP + streak badges, derived from existing data */
+  const habitCompletions = habits.reduce((sum, h) => sum + (logs[h.id]?.length ?? 0), 0);
+  const tasksCompletedTotal = tasks.filter((x) => x.status === "done").length;
+  const totalXP = habitCompletions * 10 + tasksCompletedTotal * 5;
+  const badgeHabits = habitsToday.filter((h) => h.streak >= 7);
 
   const quickAdd = () => {
     const title = quick.trim();
@@ -94,6 +99,9 @@ export function Dashboard() {
     { icon: Target, label: t("dash.stat.goals"), value: fmtNum(goals.length, lang), tone: "text-amber-500", bg: "bg-amber-500/10" },
     { icon: Gauge, label: t("dash.stat.habitRate"), value: fmtPercent(habitRate, lang), tone: "text-sky-500", bg: "bg-sky-500/10" },
   ];
+  if (user?.is_premium) {
+    stats.push({ icon: Star, label: t("dash.stat.xp"), value: fmtNum(totalXP, lang), tone: "text-violet-500", bg: "bg-violet-500/10" });
+  }
 
   const g = greetingKey();
 
@@ -244,6 +252,16 @@ export function Dashboard() {
               {fmtNum(habitsDone, lang)}/{fmtNum(habits.length, lang)}
             </Badge>
           </div>
+          {user?.is_premium && badgeHabits.length > 0 && (
+            <div className="mb-3 flex flex-wrap gap-1.5">
+              {badgeHabits.map((h) => (
+                <Badge key={h.habit.id} tone={h.streak >= 30 ? "amber" : "accent"}>
+                  <Star size={11} />
+                  {h.habit.title} · {fmtNum(h.streak, lang)}
+                </Badge>
+              ))}
+            </div>
+          )}
           {habitsToday.length === 0 ? (
             <EmptyState icon={<Flame size={20} />} title={t("dash.noHabits")} />
           ) : (
