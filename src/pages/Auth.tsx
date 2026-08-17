@@ -92,9 +92,9 @@ export function AuthPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-zinc-950/25 to-zinc-950/40" />
         <div className="relative z-10 flex h-full flex-col justify-between p-10 text-white xl:p-14">
           <div className="flex items-center gap-3">
-            <img src="/favicon.svg" alt="Life OS" className="h-9 w-9" />
+            <img src="/favicon.svg" alt="Rozvan" className="h-9 w-9" />
             <div>
-              <p className="text-lg font-bold">Life OS</p>
+              <p className="text-lg font-bold">Rozvan</p>
               <p className="text-xs text-white/60">{t("auth.tagline")}</p>
             </div>
           </div>
@@ -142,8 +142,8 @@ export function AuthPage() {
         >
           <div className="mb-8 flex items-center justify-between lg:mb-10">
             <div className="flex items-center gap-2.5">
-              <img src="/favicon.svg" alt="Life OS" className="h-8 w-8" />
-              <span className="text-base font-bold">Life OS</span>
+              <img src="/favicon.svg" alt="Rozvan" className="h-8 w-8" />
+              <span className="text-base font-bold">Rozvan</span>
             </div>
             <Segmented
               value={lang}

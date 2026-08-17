@@ -5,7 +5,7 @@
  * clicks "Continue with Google" → Google's own account chooser / consent
  * popup opens (accounts.google.com) → we receive an OAuth access token →
  * fetch the verified profile from Google's userinfo endpoint and create the
- * Life OS session from that real identity.
+ * Rozvan session from that real identity.
  *
  * Setup (Google Cloud Console):
  *   APIs & Services → Credentials → Create OAuth client ID (type: Web)

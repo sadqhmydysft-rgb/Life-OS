@@ -3,6 +3,7 @@ import { NavLink, Navigate, Outlet, useLocation, useNavigate } from "react-route
 import { motion } from "framer-motion";
 import {
   CalendarDays,
+  Crown,
   Globe,
   LayoutDashboard,
   ListChecks,
@@ -34,9 +35,9 @@ function Logo() {
   const { t } = useI18n();
   return (
     <div className="flex items-center gap-2.5">
-      <img src="/favicon.svg" alt="Life OS" className="h-8 w-8" />
+      <img src="/favicon.svg" alt="Rozvan" className="h-8 w-8" />
       <div>
-        <p className="text-[15px] font-bold tracking-tight">Life OS</p>
+        <p className="text-[15px] font-bold tracking-tight">Rozvan</p>
         <p className="hidden text-[10px] font-medium text-zinc-400 lg:block dark:text-zinc-500">
           {t("auth.tagline")}
         </p>
@@ -129,7 +130,7 @@ export function AppLayout() {
       <div className="flex min-h-dvh items-center justify-center">
         <motion.img
           src="/favicon.svg"
-          alt="Life OS"
+          alt="Rozvan"
           className="h-12 w-12"
           animate={{ scale: [1, 1.08, 1] }}
           transition={{ repeat: Infinity, duration: 1.6 }}
@@ -151,6 +152,13 @@ export function AppLayout() {
     icon: Sparkles,
     labelText: t("nav.review"),
   });
+  if (!user.is_premium) {
+    items.splice(items.length - (user.is_admin ? 1 : 0), 0, {
+      to: "/upgrade",
+      icon: Crown,
+      labelText: t("nav.upgrade"),
+    });
+  }
 
   return (
     <div className="min-h-dvh">

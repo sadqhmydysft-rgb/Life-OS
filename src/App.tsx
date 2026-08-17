@@ -12,6 +12,7 @@ import { CalendarPage } from "./pages/CalendarPage";
 import { AdminPage } from "./pages/Admin";
 import { ReviewPage } from "./pages/Review";
 import { QuickPage } from "./pages/Quick";
+import { UpgradePage } from "./pages/Upgrade";
 import UpdateToast from "./components/UpdateToast";
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
                 <Route path="calendar" element={<CalendarPage />} />
                 <Route path="review" element={<ReviewPage />} />
                 <Route path="quick" element={<QuickPage />} />
+                <Route path="upgrade" element={<UpgradePage />} />
                 <Route path="admin" element={<AdminPage />} />
               </Route>
               <Route path="*" element={<Navigate to="/" replace />} />

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { Lock, Sparkles, CheckCircle2 } from "lucide-react";
 import { useApp } from "../lib/store";
 import { useI18n } from "../lib/i18n";
@@ -53,6 +54,9 @@ export function ReviewPage() {
           <p className="mt-2 text-xs leading-6 text-zinc-500 dark:text-zinc-400">
             {t("review.lockedSub")}
           </p>
+          <Link to="/upgrade">
+            <Button className="mt-5 w-full justify-center">{t("locked.cta")}</Button>
+          </Link>
         </Card>
       </div>
     );
