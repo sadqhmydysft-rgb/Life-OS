@@ -29,7 +29,7 @@ const fa: Dict = {
 
   "auth.tagline": "سیستم‌عامل شخصی تو",
   "auth.headline": "هدف، وظیفه، عادت و مربی هوشمند — همه در یک جای آرام.",
-  "auth.sub": "Life OS روز تو را برنامه‌ریزی می‌کند، عادت‌هایت را زنده نگه می‌دارد و با مربی هوشمندش کنارت می‌ماند.",
+  "auth.sub": "Rozvan روز تو را برنامه‌ریزی می‌کند، عادت‌هایت را زنده نگه می‌دارد و با مربی هوشمندش کنارت می‌ماند.",
   "auth.f1": "برنامه‌ریزی روز در یک نگاه",
   "auth.f2": "زنجیره عادت‌ها و نقشه حرارتی",
   "auth.f3": "مربی هوشمند با کانتکست زنده",
@@ -308,7 +308,7 @@ const en: Dict = {
 
   "auth.tagline": "Your personal operating system",
   "auth.headline": "Goals, tasks, habits and an AI coach — in one calm place.",
-  "auth.sub": "Life OS plans your day, keeps your habits alive, and stays by your side with a smart coach.",
+  "auth.sub": "Rozvan plans your day, keeps your habits alive, and stays by your side with a smart coach.",
   "auth.f1": "Plan your day at a glance",
   "auth.f2": "Habit streaks & heatmaps",
   "auth.f3": "AI coach with live context",
