@@ -65,7 +65,7 @@ export default async function handler(req: any, res: any) {
         callback: `${SITE_URL}/api/payment/callback`,
         invoice_id: invoiceId,
         email: user.email,
-        description: `Rozvan — اشتراک ${plan}`,
+        description: `Life OS — اشتراک ${plan}`,
       }),
     });
     const data: any = await r.json();

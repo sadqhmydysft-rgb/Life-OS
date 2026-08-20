@@ -54,6 +54,7 @@ export default async function handler(req: any, res: any) {
       return fail("verify_failed");
     }
 
+    // fetch current app_metadata so we only add is_premium, never drop is_admin etc.
     const currentRes = await fetch(`${SUPA_URL}/auth/v1/admin/users/${userId}`, {
       headers: { apikey: SERVICE, authorization: `Bearer ${SERVICE}` },
     });
