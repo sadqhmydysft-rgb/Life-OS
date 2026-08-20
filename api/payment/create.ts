@@ -72,8 +72,9 @@ export default async function handler(req: any, res: any) {
     if (data.status !== "success") {
       return res.status(422).json({ error: "خطا در ایجاد تراکنش", code: data.code });
     }
+    const startpayPath = PIN === "sandbox" ? "startpay/sandbox" : "startpay";
     return res.status(200).json({
-      redirect: `https://panel.aqayepardakht.ir/startpay/${data.transid}`,
+      redirect: `https://panel.aqayepardakht.ir/${startpayPath}/${data.transid}`,
     });
   } catch (e: any) {
     return res.status(502).json({ error: e?.message ?? "Upstream error" });
