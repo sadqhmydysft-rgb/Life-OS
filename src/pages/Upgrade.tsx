@@ -42,8 +42,8 @@ export function UpgradePage() {
         return;
       }
       window.location.assign(data.redirect);
-    } catch {
-      setError("خطا در اتصال. دوباره تلاش کن.");
+    } catch (e: any) {
+      setError(`خطا: ${e?.message ?? String(e)}`);
     } finally {
       setLoading(null);
     }
