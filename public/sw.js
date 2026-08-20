@@ -33,15 +33,14 @@ self.addEventListener("fetch", (event) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
 
-  // Never cache live data — always hit the network, let it fail honestly if offline.
   if (isLiveDataRequest(url)) return;
 
-  // Page navigations: try network first, fall back to cached shell offline.
   if (req.mode === "navigate") {
     event.respondWith(
       fetch(req)
         .then((res) => {
-          caches.open(CACHE_NAME).then((cache) => cache.put(req, res.clone()));
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
           return res;
         })
         .catch(() => caches.match("/"))
@@ -49,12 +48,14 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Static assets (JS/CSS/images): cache-first for instant repeat loads.
   event.respondWith(
     caches.match(req).then((cached) => {
       if (cached) return cached;
       return fetch(req).then((res) => {
-        if (res.ok) caches.open(CACHE_NAME).then((cache) => cache.put(req, res.clone()));
+        if (res.ok) {
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+        }
         return res;
       });
     })
