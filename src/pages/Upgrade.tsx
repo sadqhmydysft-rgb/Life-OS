@@ -36,9 +36,16 @@ export function UpgradePage() {
         },
         body: JSON.stringify({ plan }),
       });
-      const data = await r.json();
+      const raw = await r.text();
+      let data: any = {};
+      try {
+        data = raw ? JSON.parse(raw) : {};
+      } catch {
+        setError(`پاسخ نامعتبر (وضعیت ${r.status}): ${raw.slice(0, 200)}`);
+        return;
+      }
       if (!r.ok || !data.redirect) {
-        setError(data.error ?? "خطا در اتصال به درگاه پرداخت");
+        setError(`(${r.status}) ${data.error ?? "خطا در اتصال به درگاه پرداخت"}`);
         return;
       }
       window.location.assign(data.redirect);
