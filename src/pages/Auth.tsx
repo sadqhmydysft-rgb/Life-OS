@@ -162,7 +162,7 @@ export function AuthPage() {
               </h2>
               <p className="mt-1 mb-6 text-xs text-zinc-500 dark:text-zinc-400">{t("auth.tagline")}</p>
 
-              <div className="mb-6 grid w-full grid-cols-2 rounded-2xl bg-zinc-500/10 p-1.5 dark:bg-[#15151d]">
+              <div className="mb-6 grid w-full grid-cols-2 rounded-2xl bg-zinc-500/10 p-1.5 dark:bg-white/[0.06]">
                 {(["login", "signup"] as const).map((v) => (
                   <button
                     key={v}
@@ -175,7 +175,7 @@ export function AuthPage() {
                     className={cn(
                       "h-11 cursor-pointer rounded-xl text-sm font-semibold transition-all duration-200",
                       mode === v
-                        ? "bg-white text-zinc-900 shadow-sm dark:bg-[#2b2b3d] dark:text-white"
+                        ? "bg-white text-zinc-900 shadow-sm dark:bg-zinc-800 dark:text-white"
                         : "text-zinc-500 hover:text-zinc-800 dark:text-zinc-500 dark:hover:text-zinc-200",
                     )}
                   >
@@ -288,31 +288,9 @@ export function AuthPage() {
                 {busy ? <Loader2 size={16} className="animate-spin" /> : <Chrome size={16} />}
                 {t("auth.google")}
               </Button>
-              <p className="mt-2 text-center text-[10px] text-zinc-400">
-                {backendMode === "supabase" ? t("auth.viaGoogle") : gisReady ? t("auth.viaGis") : t("auth.demoNote")}
-              </p>
             </>
           )}
 
-          {/* backend status */}
-          <div className="mt-8 flex justify-center">
-            <span
-              className={cn(
-                "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-medium",
-                backendMode === "supabase"
-                  ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                  : "bg-zinc-500/10 text-zinc-400 dark:text-zinc-500",
-              )}
-            >
-              <span
-                className={cn(
-                  "h-1.5 w-1.5 rounded-full",
-                  backendMode === "supabase" ? "bg-emerald-500" : "bg-zinc-400",
-                )}
-              />
-              {t(`auth.backend.${backendMode}`)}
-            </span>
-          </div>
         </motion.div>
       </div>
     </div>
