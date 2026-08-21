@@ -45,7 +45,7 @@ export function UpgradePage() {
         return;
       }
       if (!r.ok || !data.redirect) {
-        setError(`(${r.status}) ${data.error ?? "خطا در اتصال به درگاه پرداخت"}`);
+        setError(`(${r.status}) ${data.error ?? "خطا در اتصال به درگاه پرداخت"} — کد: ${data.code ?? "?"}`);
         return;
       }
       window.location.assign(data.redirect);
