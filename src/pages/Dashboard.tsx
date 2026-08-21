@@ -104,9 +104,27 @@ export function Dashboard() {
   }
 
   const g = greetingKey();
+  const isNewAccount = goals.length === 0 && tasks.length === 0 && habits.length === 0;
 
   return (
     <div className="space-y-5">
+      {isNewAccount && (
+        <Card className="flex flex-col gap-4 border-accent-500/25 bg-accent-500/[0.06] p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <div className="mb-1 flex items-center gap-2 text-sm font-bold">
+              <Sparkles size={16} className="text-accent-500" />
+              {t("dash.onboard.title")}
+            </div>
+            <p className="text-xs leading-6 text-zinc-500 dark:text-zinc-400">
+              {t("dash.onboard.step1")} → {t("dash.onboard.step2")} → {t("dash.onboard.step3")}
+            </p>
+          </div>
+          <Link to="/goals" className="chip shrink-0 !bg-accent-500 !text-white">
+            <Plus size={14} />
+            {t("dash.onboard.cta")}
+          </Link>
+        </Card>
+      )}
       {/* ------------------------------ header ------------------------------ */}
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
